@@ -1,0 +1,20 @@
+{
+  "name": "mandai-wild-discovery-backend",
+  "version": "1.0.0",
+  "description": "Single Lambda (identify + chat) for Mandai Wild Discovery, plus a local mock dev server.",
+  "type": "module",
+  "main": "src/handler.js",
+  "scripts": {
+    "dev:mock": "node src/devServer.js --mock",
+    "dev:real": "node --env-file-if-exists=.env src/devServer.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.658.0",
+    "express": "^4.21.0",
+    "cors": "^2.8.5"
+  }
+}

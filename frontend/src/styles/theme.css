@@ -1,0 +1,383 @@
+/* Mandai Wild Discovery — documented green & earth-tone palette (Requirement 4.2).
+ * All primary controls and the response area draw ONLY from these tokens. */
+:root {
+  /* Primary greens */
+  --green-deep: #2f5233;   /* headers, primary buttons */
+  --green: #4a7c59;        /* accents, active toggle */
+  --green-soft: #6b9080;   /* secondary accents */
+
+  /* Browns */
+  --brown-dark: #5c4433;   /* body text on light */
+  --brown: #8b6f52;        /* borders, muted text */
+
+  /* Warm neutrals */
+  --sand: #f4efe6;         /* page background */
+  --cream: #fbf8f2;        /* card background */
+  --clay: #e0d6c3;         /* dividers, disabled */
+
+  /* Feedback (kept within earth family) */
+  --amber: #b5852a;        /* low-confidence / warning text */
+  --error: #a4432f;        /* error text (terracotta) */
+
+  --radius: 14px;
+  --shadow: 0 2px 10px rgba(92, 68, 51, 0.12);
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--sand);
+  color: var(--brown-dark);
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  padding: 18px 12px 8px;
+}
+.app-header h1 {
+  color: var(--green-deep);
+  font-size: 1.6rem;
+  margin: 0 0 4px;
+}
+.app-header p {
+  color: var(--brown);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Controls card */
+.controls {
+  background: var(--cream);
+  border: 1px solid var(--clay);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin: 16px 0;
+}
+
+/* Age-mode toggle */
+.age-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.age-toggle button {
+  flex: 1;
+  padding: 10px 12px;
+  border: 2px solid var(--green-soft);
+  background: var(--cream);
+  color: var(--green-deep);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.age-toggle button.active {
+  background: var(--green);
+  color: var(--cream);
+  border-color: var(--green);
+}
+
+/* Mock animal picker (dev only) */
+.mock-picker {
+  display: block;
+  margin-bottom: 16px;
+}
+.mock-picker span {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brown);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+.mock-picker .lang-select {
+  margin-bottom: 0;
+}
+
+/* Language selector */
+.lang-select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 2px solid var(--clay);
+  border-radius: 10px;
+  background: var(--cream);
+  color: var(--brown-dark);
+  font-size: 0.95rem;
+}
+
+/* Photo button + preview */
+.photo-label {
+  display: block;
+  width: 100%;
+}
+.photo-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--green-deep);
+  color: var(--cream);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s;
+}
+.btn:hover:not(:disabled) {
+  background: var(--green);
+}
+.btn:disabled {
+  background: var(--clay);
+  color: var(--brown);
+  cursor: not-allowed;
+}
+.btn-secondary {
+  background: var(--green-soft);
+  margin-top: 10px;
+}
+
+.preview-wrap {
+  position: relative;
+  margin-top: 14px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--clay);
+}
+.preview-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.bbox-overlay {
+  position: absolute;
+  border: 3px solid var(--amber);
+  border-radius: 6px;
+  box-shadow: 0 0 0 9999px rgba(47, 82, 51, 0.08);
+  pointer-events: none;
+}
+
+.field-error {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin: 10px 0 0;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--green-deep);
+  font-weight: 600;
+  padding: 16px 0;
+}
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--clay);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Response area */
+.response {
+  margin-top: 8px;
+}
+.species-name {
+  color: var(--green-deep);
+  font-size: 1.4rem;
+  margin: 4px 0 12px;
+}
+.facts {
+  display: grid;
+  gap: 12px;
+}
+.fact-card {
+  background: var(--cream);
+  border-left: 5px solid var(--green);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.clarify {
+  background: var(--cream);
+  border: 2px dashed var(--amber);
+  border-radius: var(--radius);
+  padding: 18px;
+  color: var(--brown-dark);
+  font-size: 1.05rem;
+  text-align: center;
+}
+.error-box {
+  background: var(--cream);
+  border: 2px solid var(--error);
+  border-radius: var(--radius);
+  padding: 16px;
+  color: var(--error);
+  text-align: center;
+}
+
+/* Section headings inside response */
+.section {
+  margin-top: 24px;
+}
+.section h3 {
+  color: var(--green-deep);
+  border-bottom: 2px solid var(--clay);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+/* Wild Passport */
+.passport-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.passport-card {
+  background: var(--green-soft);
+  color: var(--cream);
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.badge {
+  display: inline-block;
+  background: var(--amber);
+  color: var(--cream);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+/* Map */
+.map-wrap {
+  height: 320px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--clay);
+}
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+.slider-row input[type='range'] {
+  flex: 1;
+  accent-color: var(--green);
+}
+.slider-label {
+  font-weight: 700;
+  color: var(--green-deep);
+  min-width: 96px;
+}
+.map-message {
+  background: var(--cream);
+  border: 1px solid var(--clay);
+  border-radius: var(--radius);
+  padding: 18px;
+  text-align: center;
+  color: var(--brown);
+}
+
+/* Chat */
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.chat-bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+}
+.chat-bubble.user {
+  align-self: flex-end;
+  background: var(--green);
+  color: var(--cream);
+  border-bottom-right-radius: 4px;
+}
+.chat-bubble.bot {
+  align-self: flex-start;
+  background: var(--cream);
+  border: 1px solid var(--clay);
+  color: var(--brown-dark);
+  border-bottom-left-radius: 4px;
+}
+.chat-form {
+  display: flex;
+  gap: 8px;
+}
+.chat-form input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid var(--clay);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+.chat-form button {
+  width: auto;
+  padding: 12px 18px;
+}
+
+@media (max-width: 360px) {
+  .app-header h1 {
+    font-size: 1.35rem;
+  }
+  .chat-form {
+    flex-direction: column;
+  }
+  .chat-form button {
+    width: 100%;
+  }
+}

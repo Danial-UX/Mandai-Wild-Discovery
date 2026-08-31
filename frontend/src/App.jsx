@@ -99,7 +99,7 @@ export default function App() {
       <div className="controls">
         {USE_MOCK && (
           <label className="mock-picker">
-            <span>Demo animal (mock mode)</span>
+            <span>Animal Sighted</span>
             <select
               className="lang-select"
               value={mockId}
